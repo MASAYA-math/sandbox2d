@@ -47,8 +47,14 @@ class Dirt(Block):
 def main():
     pg.init()
     screen = pg.display.set_mode((256, 256))
-    dev_block = Block(os.path.join("assets", "dev_block.png"), (0, 0), True)
-    screen.blit(dev_block.surface, dev_block.position)
+    blocks = []
+    for i in range(16):
+        for j in range(16):
+            blocks.append(
+                Block(os.path.join("assets", "dev_block.png"),
+                      (16 * i, 16 * j), True))
+            screen.blit(blocks[16 * i + j].surface,
+                        blocks[16 * i + j].position)
     while True:
         for event in pg.event.get():
             if event.type == pg.QUIT:
