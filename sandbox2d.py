@@ -29,11 +29,14 @@ class Zombie(Enemy):
 
 # Block entities.
 class Block():
-    def __init__(self, image_path, x_pos, y_pos, is_collision):
+    def __init__(self, image_path, position, is_collision):
         self.image_path = image_path
-        self.x_pos = x_pos
-        self.y_pos = y_pos
+        self.position = position
         self. is_collision = is_collision
+        self.surface = self.load_image()
+
+    def load_image(self):
+        return pg.image.load(self.image_path).convert()
 
 
 class Dirt(Block):
@@ -44,8 +47,8 @@ class Dirt(Block):
 def main():
     pg.init()
     screen = pg.display.set_mode((256, 256))
-    dev_block = Block(os.path.join("assets", "dev_block.png"), 0, 0, True)
-    screen.blit(pg.image.load(dev_block.image_path).convert(), (0, 0))
+    dev_block = Block(os.path.join("assets", "dev_block.png"), (0, 0), True)
+    screen.blit(dev_block.surface, dev_block.position)
     while True:
         for event in pg.event.get():
             if event.type == pg.QUIT:
