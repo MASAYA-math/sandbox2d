@@ -4,7 +4,7 @@ import os
 
 def culculate_coordinates(camera_position, block_position):
     return ((block_position[0] - camera_position[0]) * 16,
-            (block_position[1] - camera_position[1]) * 16)
+            (-(block_position[1] - camera_position[1] - 15) * 16))
 
 
 # Life entities
@@ -68,25 +68,32 @@ def main():
     pg.init()
     screen = pg.display.set_mode((256, 256))
     blocks = []
-    camera_position = (-5, 0)
+    camera_position = (0, 0)
     while True:
         screen.fill((0, 0, 0))
-        for i in range(16):
-            for j in range(16):
-                blocks.append(DevBlock(screen, camera_position, (i, j)))
+        # for i in range(16):
+        #     for j in range(16):
+        #         blocks.append(DevBlock(screen, camera_position, (i, j)))
+        blocks.append(DevBlock(screen, camera_position, (15, 15)))
+        blocks.append(DevBlock(screen, camera_position, (14, 14)))
+        blocks.append(DevBlock(screen, camera_position, (0, 0)))
+        blocks.append(DevBlock(screen, camera_position, (16, 16)))
+        blocks.append(DevBlock(screen, camera_position, (15, 0)))
+        blocks.append(DevBlock(screen, camera_position, (0, 15)))
+        blocks.append(DevBlock(screen, camera_position, (1, 14)))
         for event in pg.event.get():
             if event.type == pg.QUIT:
                 return
             elif event.type == pg.KEYDOWN:
                 if event.key == pg.K_w:
                     camera_position = (
-                        camera_position[0], camera_position[1] - 1)
+                        camera_position[0], camera_position[1] + 1)
                 if event.key == pg.K_a:
                     camera_position = (
                         camera_position[0] - 1, camera_position[1])
                 if event.key == pg.K_s:
                     camera_position = (
-                        camera_position[0], camera_position[1] + 1)
+                        camera_position[0], camera_position[1] - 1)
                 if event.key == pg.K_d:
                     camera_position = (
                         camera_position[0] + 1, camera_position[1])
