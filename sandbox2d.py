@@ -57,9 +57,9 @@ def main():
     for i in range(16):
         for j in range(16):
             blocks.append(
-                DevBlock((16 * i, 16 * j), True))
+                DevBlock((i, j), True))
             screen.blit(blocks[16 * i + j].surface,
-                        blocks[16 * i + j].position)
+                        [n*16 for n in blocks[16 * i + j].position])
     while True:
         for event in pg.event.get():
             if event.type == pg.QUIT:
