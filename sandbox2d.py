@@ -54,7 +54,7 @@ class Dirt(Block):
     pass
 
 
-# Main function.
+# The main function.
 def main():
     pg.init()
     screen = pg.display.set_mode((256, 256))
