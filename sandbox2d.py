@@ -45,9 +45,9 @@ class Block():
 
 
 class DevBlock(Block):
-    def __init__(self, screen, position, is_collision):
+    def __init__(self, screen, position):
         super().__init__(screen, os.path.join("assets", "dev_block.png"),
-                         position, is_collision)
+                         position, True)
 
 
 class Dirt(Block):
@@ -61,7 +61,7 @@ def main():
     blocks = []
     for i in range(16):
         for j in range(16):
-            blocks.append(DevBlock(screen, (i, j), True))
+            blocks.append(DevBlock(screen, (i, j)))
     while True:
         for event in pg.event.get():
             if event.type == pg.QUIT:
