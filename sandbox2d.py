@@ -29,19 +29,24 @@ class Zombie(Enemy):
 
 # Block entities.
 class Block():
-    def __init__(self, image_path, position, is_collision):
+    def __init__(self, screen, image_path, position, is_collision):
+        self.screen = screen
         self.image_path = image_path
         self.position = position
         self. is_collision = is_collision
         self.surface = self.load_image()
+        self.set_block()
 
     def load_image(self):
         return pg.image.load(self.image_path).convert()
 
+    def set_block(self):
+        self.screen.blit(self.surface, [n*16 for n in self.position])
+
 
 class DevBlock(Block):
-    def __init__(self, position, is_collision):
-        super().__init__(os.path.join("assets", "dev_block.png"),
+    def __init__(self, screen, position, is_collision):
+        super().__init__(screen, os.path.join("assets", "dev_block.png"),
                          position, is_collision)
 
 
@@ -56,10 +61,7 @@ def main():
     blocks = []
     for i in range(16):
         for j in range(16):
-            blocks.append(
-                DevBlock((i, j), True))
-            screen.blit(blocks[16 * i + j].surface,
-                        [n*16 for n in blocks[16 * i + j].position])
+            blocks.append(DevBlock(screen, (i, j), True))
     while True:
         for event in pg.event.get():
             if event.type == pg.QUIT:
