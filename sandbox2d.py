@@ -39,6 +39,12 @@ class Block():
         return pg.image.load(self.image_path).convert()
 
 
+class DevBlock(Block):
+    def __init__(self, position, is_collision):
+        super().__init__(os.path.join("assets", "dev_block.png"),
+                         position, is_collision)
+
+
 class Dirt(Block):
     pass
 
@@ -51,8 +57,7 @@ def main():
     for i in range(16):
         for j in range(16):
             blocks.append(
-                Block(os.path.join("assets", "dev_block.png"),
-                      (16 * i, 16 * j), True))
+                DevBlock((16 * i, 16 * j), True))
             screen.blit(blocks[16 * i + j].surface,
                         blocks[16 * i + j].position)
     while True:
