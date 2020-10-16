@@ -22,17 +22,6 @@ def culculate_coordinates(camera_position, block_position):
             (-(block_position[1] - camera_position[1] - 15) * 16))
 
 
-def draw_map(screen, camera_position):
-    blocks = []
-    blocks.append(DevBlock(screen, camera_position, (15, 15)))
-    blocks.append(DevBlock(screen, camera_position, (14, 14)))
-    blocks.append(DevBlock(screen, camera_position, (0, 0)))
-    blocks.append(DevBlock(screen, camera_position, (16, 16)))
-    blocks.append(DevBlock(screen, camera_position, (15, 0)))
-    blocks.append(DevBlock(screen, camera_position, (0, 15)))
-    blocks.append(DevBlock(screen, camera_position, (1, 14)))
-
-
 class Chunk():
     def __init__(self, chunk_data, chunk_position):
         self.chunk_data = chunk_data
