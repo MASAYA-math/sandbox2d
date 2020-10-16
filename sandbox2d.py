@@ -7,6 +7,17 @@ def culculate_coordinates(camera_position, block_position):
             (-(block_position[1] - camera_position[1] - 15) * 16))
 
 
+def draw_screen(screen, camera_position):
+    blocks = []
+    blocks.append(DevBlock(screen, camera_position, (15, 15)))
+    blocks.append(DevBlock(screen, camera_position, (14, 14)))
+    blocks.append(DevBlock(screen, camera_position, (0, 0)))
+    blocks.append(DevBlock(screen, camera_position, (16, 16)))
+    blocks.append(DevBlock(screen, camera_position, (15, 0)))
+    blocks.append(DevBlock(screen, camera_position, (0, 15)))
+    blocks.append(DevBlock(screen, camera_position, (1, 14)))
+
+
 # Life entities
 class Player():
     pass
@@ -67,21 +78,14 @@ class Dirt(Block):
 def main():
     pg.init()
     screen = pg.display.set_mode((256, 256))
-    blocks = []
     camera_position = (0, 0)
     move_speed = 0.01
     while True:
         screen.fill((0, 0, 0))
+        draw_screen(screen, camera_position)
         # for i in range(16):
         #     for j in range(16):
         #         blocks.append(DevBlock(screen, camera_position, (i, j)))
-        blocks.append(DevBlock(screen, camera_position, (15, 15)))
-        blocks.append(DevBlock(screen, camera_position, (14, 14)))
-        blocks.append(DevBlock(screen, camera_position, (0, 0)))
-        blocks.append(DevBlock(screen, camera_position, (16, 16)))
-        blocks.append(DevBlock(screen, camera_position, (15, 0)))
-        blocks.append(DevBlock(screen, camera_position, (0, 15)))
-        blocks.append(DevBlock(screen, camera_position, (1, 14)))
         if pg.key.get_pressed()[pg.K_w]:
             camera_position = (
                 camera_position[0], camera_position[1] + move_speed)
