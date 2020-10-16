@@ -20,6 +20,15 @@ for i in range(CHUNK_HEIGHT):
         else:
             chank_data_sample[i].append(DEV_BLOCK_AQUA_ID)
 
+chank_data_sample_2 = []
+for i in range(CHUNK_HEIGHT):
+    chank_data_sample_2.append([])
+    for j in range(CHUNK_WIDTH):
+        if i >= 12:
+            chank_data_sample_2[i].append(DEV_BLOCK_BLUE_ID)
+        else:
+            chank_data_sample_2[i].append(DEV_BLOCK_AQUA_ID)
+
 
 def culculate_coordinates(camera_position, block_position):
     return ((block_position[0] - camera_position[0]) * 16,
@@ -119,9 +128,13 @@ def main():
     camera_position = (0, 0)
     move_speed = 0.5
     chunk = Chunk(chank_data_sample, 0)
+    chunk_2 = Chunk(chank_data_sample_2, 1)
+    chunk_3 = Chunk(chank_data_sample, 2)
     while True:
         screen.fill((0, 0, 0))
         chunk.draw_chunk(screen, camera_position)
+        chunk_2.draw_chunk(screen, camera_position)
+        chunk_3.draw_chunk(screen, camera_position)
         if pg.key.get_pressed()[pg.K_w]:
             camera_position = (
                 camera_position[0], camera_position[1] + move_speed)
