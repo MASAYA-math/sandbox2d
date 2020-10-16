@@ -2,14 +2,18 @@ import pygame as pg
 import os
 
 
+CHUNK_WIDTH = 16
+CHUNK_HEIGHT = 32
+
+
 # Block IDs
 DEV_BLOCK_ID = 0
 
 
 chank_data_sample = []
-for i in range(64):
+for i in range(CHUNK_HEIGHT):
     chank_data_sample.append([])
-    for j in range(16):
+    for j in range(CHUNK_WIDTH):
         chank_data_sample[i].append(0)
 
 
@@ -36,11 +40,12 @@ class Chunk():
 
     def draw_chunk(self, screen, camera_position):
         self.blocks = []
-        for i in range(64):
-            for j in range(16):
+        for i in range(CHUNK_HEIGHT):
+            for j in range(CHUNK_WIDTH):
                 self.blocks.append(
                     DevBlock(screen, camera_position,
-                             (j + self.chunk_position * 16, 31 - i))
+                             (j + self.chunk_position * CHUNK_WIDTH,
+                              (CHUNK_HEIGHT / 2 - 1) - i))
                     if self.chunk_data[i][j] == 0 else None)
 
 
@@ -105,7 +110,7 @@ def main():
     pg.init()
     screen = pg.display.set_mode((256, 256))
     camera_position = (0, 0)
-    move_speed = 1
+    move_speed = 0.5
     chunk = Chunk(chank_data_sample, 0)
     while True:
         screen.fill((0, 0, 0))
