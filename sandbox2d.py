@@ -15,7 +15,10 @@ chank_data_sample = []
 for i in range(CHUNK_HEIGHT):
     chank_data_sample.append([])
     for j in range(CHUNK_WIDTH):
-        chank_data_sample[i].append(0)
+        if i >= 15:
+            chank_data_sample[i].append(DEV_BLOCK_BLUE_ID)
+        else:
+            chank_data_sample[i].append(DEV_BLOCK_AQUA_ID)
 
 
 def culculate_coordinates(camera_position, block_position):
@@ -36,7 +39,10 @@ class Chunk():
                     DevBlockBlue(screen, camera_position,
                                  (j + self.chunk_position * CHUNK_WIDTH,
                                   (CHUNK_HEIGHT / 2 - 1) - i))
-                    if self.chunk_data[i][j] == DEV_BLOCK_BLUE_ID else None)
+                    if self.chunk_data[i][j] == DEV_BLOCK_BLUE_ID
+                    else DevBlockAqua(screen, camera_position,
+                                      (j + self.chunk_position * CHUNK_WIDTH,
+                                       (CHUNK_HEIGHT / 2 - 1) - i)))
 
 
 # Life entities
