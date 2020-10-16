@@ -114,11 +114,7 @@ def main():
     chunk = Chunk(chank_data_sample, 0)
     while True:
         screen.fill((0, 0, 0))
-        # draw_map(screen, camera_position)
         chunk.draw_chunk(screen, camera_position)
-        # for i in range(16):
-        #     for j in range(16):
-        #         blocks.append(DevBlock(screen, camera_position, (i, j)))
         if pg.key.get_pressed()[pg.K_w]:
             camera_position = (
                 camera_position[0], camera_position[1] + move_speed)
