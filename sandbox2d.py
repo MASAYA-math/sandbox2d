@@ -2,6 +2,17 @@ import pygame as pg
 import os
 
 
+# Block IDs
+DEV_BLOCK_ID = 0
+
+
+chank_data_sample = []
+for i in range(64):
+    chank_data_sample.append([])
+    for j in range(16):
+        chank_data_sample[i].append(0)
+
+
 def culculate_coordinates(camera_position, block_position):
     return ((block_position[0] - camera_position[0]) * 16,
             (-(block_position[1] - camera_position[1] - 15) * 16))
@@ -16,6 +27,21 @@ def draw_map(screen, camera_position):
     blocks.append(DevBlock(screen, camera_position, (15, 0)))
     blocks.append(DevBlock(screen, camera_position, (0, 15)))
     blocks.append(DevBlock(screen, camera_position, (1, 14)))
+
+
+class Chunk():
+    def __init__(self, chunk_data, chunk_position):
+        self.chunk_data = chunk_data
+        self.chunk_position = chunk_position
+
+    def draw_chunk(self, screen, camera_position):
+        self.blocks = []
+        for i in range(64):
+            for j in range(16):
+                self.blocks.append(
+                    DevBlock(screen, camera_position,
+                             (j + self.chunk_position * 16, 31 - i))
+                    if self.chunk_data[i][j] == 0 else None)
 
 
 # Life entities
@@ -79,10 +105,12 @@ def main():
     pg.init()
     screen = pg.display.set_mode((256, 256))
     camera_position = (0, 0)
-    move_speed = 0.01
+    move_speed = 1
+    chunk = Chunk(chank_data_sample, 0)
     while True:
         screen.fill((0, 0, 0))
-        draw_map(screen, camera_position)
+        # draw_map(screen, camera_position)
+        chunk.draw_chunk(screen, camera_position)
         # for i in range(16):
         #     for j in range(16):
         #         blocks.append(DevBlock(screen, camera_position, (i, j)))
