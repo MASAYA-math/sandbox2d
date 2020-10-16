@@ -7,7 +7,7 @@ def culculate_coordinates(camera_position, block_position):
             (-(block_position[1] - camera_position[1] - 15) * 16))
 
 
-def draw_screen(screen, camera_position):
+def draw_map(screen, camera_position):
     blocks = []
     blocks.append(DevBlock(screen, camera_position, (15, 15)))
     blocks.append(DevBlock(screen, camera_position, (14, 14)))
@@ -82,7 +82,7 @@ def main():
     move_speed = 0.01
     while True:
         screen.fill((0, 0, 0))
-        draw_screen(screen, camera_position)
+        draw_map(screen, camera_position)
         # for i in range(16):
         #     for j in range(16):
         #         blocks.append(DevBlock(screen, camera_position, (i, j)))
