@@ -69,6 +69,7 @@ def main():
     screen = pg.display.set_mode((256, 256))
     blocks = []
     camera_position = (0, 0)
+    move_speed = 0.1
     while True:
         screen.fill((0, 0, 0))
         # for i in range(16):
@@ -84,19 +85,18 @@ def main():
         for event in pg.event.get():
             if event.type == pg.QUIT:
                 return
-            elif event.type == pg.KEYDOWN:
-                if event.key == pg.K_w:
-                    camera_position = (
-                        camera_position[0], camera_position[1] + 1)
-                if event.key == pg.K_a:
-                    camera_position = (
-                        camera_position[0] - 1, camera_position[1])
-                if event.key == pg.K_s:
-                    camera_position = (
-                        camera_position[0], camera_position[1] - 1)
-                if event.key == pg.K_d:
-                    camera_position = (
-                        camera_position[0] + 1, camera_position[1])
+            if pg.key.get_pressed()[pg.K_w]:
+                camera_position = (
+                    camera_position[0], camera_position[1] + move_speed)
+            if pg.key.get_pressed()[pg.K_a]:
+                camera_position = (
+                    camera_position[0] - move_speed, camera_position[1])
+            if pg.key.get_pressed()[pg.K_s]:
+                camera_position = (
+                    camera_position[0], camera_position[1] - move_speed)
+            if pg.key.get_pressed()[pg.K_d]:
+                camera_position = (
+                    camera_position[0] + move_speed, camera_position[1])
 
         pg.display.update()
 
