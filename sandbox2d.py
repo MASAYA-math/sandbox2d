@@ -26,6 +26,13 @@ def culculate_coordinates(camera_position, block_position):
             (-(block_position[1] - camera_position[1] - 15) * 16))
 
 
+def by_id_make_block(id, screen, camera_position, block_position):
+    if id == DEV_BLOCK_BLUE_ID:
+        return DevBlockBlue(screen, camera_position, block_position)
+    elif id == DEV_BLOCK_AQUA_ID:
+        return DevBlockAqua(screen, camera_position, block_position)
+
+
 class Chunk():
     def __init__(self, chunk_data, chunk_position):
         self.chunk_data = chunk_data
@@ -36,13 +43,10 @@ class Chunk():
         for i in range(CHUNK_HEIGHT):
             for j in range(CHUNK_WIDTH):
                 self.blocks.append(
-                    DevBlockBlue(screen, camera_position,
-                                 (j + self.chunk_position * CHUNK_WIDTH,
-                                  (CHUNK_HEIGHT / 2 - 1) - i))
-                    if self.chunk_data[i][j] == DEV_BLOCK_BLUE_ID
-                    else DevBlockAqua(screen, camera_position,
-                                      (j + self.chunk_position * CHUNK_WIDTH,
-                                       (CHUNK_HEIGHT / 2 - 1) - i)))
+                    by_id_make_block(self.chunk_data[i][j],
+                                     screen, camera_position,
+                                     (j + self.chunk_position * CHUNK_WIDTH,
+                                      (CHUNK_HEIGHT / 2 - 1) - i)))
 
 
 # Life entities
