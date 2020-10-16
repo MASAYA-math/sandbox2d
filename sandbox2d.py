@@ -8,6 +8,7 @@ CHUNK_HEIGHT = 32
 
 # Block IDs
 DEV_BLOCK_BLUE_ID = 0
+DEV_BLOCK_AQUA_ID = 1
 
 
 chank_data_sample = []
@@ -87,6 +88,13 @@ class DevBlockBlue(Block):
     def __init__(self, screen, camera_position, position):
         super().__init__(screen, camera_position,
                          os.path.join("assets", "dev_block_blue.png"),
+                         position, True)
+
+
+class DevBlockAqua(Block):
+    def __init__(self, screen, camera_position, position):
+        super().__init__(screen, camera_position,
+                         os.path.join("assets", "dev_block_aqua.png"),
                          position, True)
 
 
