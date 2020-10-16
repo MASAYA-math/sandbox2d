@@ -7,7 +7,7 @@ CHUNK_HEIGHT = 32
 
 
 # Block IDs
-DEV_BLOCK_ID = 0
+DEV_BLOCK_BLUE_ID = 0
 
 
 chank_data_sample = []
@@ -32,10 +32,10 @@ class Chunk():
         for i in range(CHUNK_HEIGHT):
             for j in range(CHUNK_WIDTH):
                 self.blocks.append(
-                    DevBlock(screen, camera_position,
-                             (j + self.chunk_position * CHUNK_WIDTH,
-                              (CHUNK_HEIGHT / 2 - 1) - i))
-                    if self.chunk_data[i][j] == 0 else None)
+                    DevBlockBlue(screen, camera_position,
+                                 (j + self.chunk_position * CHUNK_WIDTH,
+                                  (CHUNK_HEIGHT / 2 - 1) - i))
+                    if self.chunk_data[i][j] == DEV_BLOCK_BLUE_ID else None)
 
 
 # Life entities
@@ -83,10 +83,10 @@ class Block():
             self.camera_position, self.position))
 
 
-class DevBlock(Block):
+class DevBlockBlue(Block):
     def __init__(self, screen, camera_position, position):
         super().__init__(screen, camera_position,
-                         os.path.join("assets", "dev_block.png"),
+                         os.path.join("assets", "dev_block_blue.png"),
                          position, True)
 
 
