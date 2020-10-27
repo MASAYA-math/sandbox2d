@@ -11,26 +11,26 @@ DEV_BLOCK_BLUE_ID = 0
 DEV_BLOCK_AQUA_ID = 1
 
 
-chank_data_sample = []
+chunk_data_sample = []
 for i in range(CHUNK_HEIGHT):
-    chank_data_sample.append([])
+    chunk_data_sample.append([])
     for j in range(CHUNK_WIDTH):
         if i >= 15:
-            chank_data_sample[i].append(DEV_BLOCK_BLUE_ID)
+            chunk_data_sample[i].append(DEV_BLOCK_BLUE_ID)
         else:
-            chank_data_sample[i].append(DEV_BLOCK_AQUA_ID)
+            chunk_data_sample[i].append(DEV_BLOCK_AQUA_ID)
 
-chank_data_sample_2 = []
+chunk_data_sample_2 = []
 for i in range(CHUNK_HEIGHT):
-    chank_data_sample_2.append([])
+    chunk_data_sample_2.append([])
     for j in range(CHUNK_WIDTH):
         if i >= 12:
-            chank_data_sample_2[i].append(DEV_BLOCK_BLUE_ID)
+            chunk_data_sample_2[i].append(DEV_BLOCK_BLUE_ID)
         else:
-            chank_data_sample_2[i].append(DEV_BLOCK_AQUA_ID)
+            chunk_data_sample_2[i].append(DEV_BLOCK_AQUA_ID)
 
 
-def culculate_coordinates(camera_position, block_position):
+def calculate_coordinates(camera_position, block_position):
     return ((block_position[0] - camera_position[0]) * 16,
             (-(block_position[1] - camera_position[1] - 15) * 16))
 
@@ -96,7 +96,7 @@ class Block():
         return pg.image.load(self.image_path).convert()
 
     def draw_block(self, screen, camera_position):
-        screen.blit(self.surface, culculate_coordinates(
+        screen.blit(self.surface, calculate_coordinates(
             camera_position, self.position))
 
 
@@ -122,9 +122,9 @@ def main():
     screen = pg.display.set_mode((256, 256))
     camera_position = (0, 0)
     move_speed = 0.01
-    chunk = Chunk(chank_data_sample, 0)
-    chunk_2 = Chunk(chank_data_sample_2, 1)
-    chunk_3 = Chunk(chank_data_sample, 2)
+    chunk = Chunk(chunk_data_sample, 0)
+    chunk_2 = Chunk(chunk_data_sample_2, 1)
+    chunk_3 = Chunk(chunk_data_sample, 2)
     while True:
         screen.fill((0, 0, 0))
         chunk.draw_chunk(screen, camera_position)
