@@ -119,7 +119,7 @@ class Dirt(Block):
 # The main function.
 def main():
     pg.init()
-    screen = pg.display.set_mode((256, 256))
+    screen = pg.display.set_mode((512, 512))
     camera_position = (0, 0)
     move_speed = 0.01
     chunk = Chunk(chunk_data_sample, 0)
